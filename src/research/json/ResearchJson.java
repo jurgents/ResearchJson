@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package researchjson;
+package research.json;
 
 import java.util.HashMap;
 import java.util.Iterator;
