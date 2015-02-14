@@ -5,6 +5,7 @@
  */
 package research.xquery;
 
+import javax.xml.xpath.XPathExpressionException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -38,10 +39,10 @@ public class ResearchXQueryTest {
     }
 
     @Test
-    public void testSomeMethod() {
+    public void testExistsAReport() throws XPathExpressionException {
         ResearchXQuery researchXQuery = new ResearchXQuery();
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(2, researchXQuery.numberOfReports());
     }
     
 }
