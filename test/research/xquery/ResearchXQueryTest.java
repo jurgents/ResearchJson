@@ -42,7 +42,7 @@ public class ResearchXQueryTest {
     public void testExistsAReport() throws XPathExpressionException {
         ResearchXQuery researchXQuery = new ResearchXQuery();
         // TODO review the generated test code and remove the default call to fail.
-        assertTrue(researchXQuery.existsAReport());
+        assertEquals(2, researchXQuery.numberOfReports());
     }
     
 }
