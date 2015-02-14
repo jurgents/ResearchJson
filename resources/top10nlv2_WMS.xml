@@ -254,7 +254,7 @@
                   </gml:begin>
                   <gml:end>
                     <gml:TimeInstant gml:id='N10267'>
-                      <gml:timePosition />
+                      <gml:timePosition>2015-02-14</gml:timePosition>
                     </gml:TimeInstant>
                   </gml:end>
                 </gml:TimePeriod>
