@@ -62,10 +62,7 @@ public class ResearchXQuery {
    }
     
     public int numberOfReports() throws XPathExpressionException{
-        
-        
- 
- 
+         
             NamespaceContext namespaceContextNgrMetadata = new NamespaceContext() {
                 
                 @Override
@@ -97,49 +94,21 @@ public class ResearchXQuery {
                     throw new UnsupportedOperationException("Not supported");
                 }
             };
-            
-            // xPath.s
+
             xPath.setNamespaceContext(namespaceContextNgrMetadata);
             
-            // String expressionReport = "//gmd:MD_Metadata/gmd:identificationInfo/srv:SV_ServiceIdentification/srv:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:end/gml:TimeInstant/gml:timePosition";
-            //read a string value
-            String expressionReport = "gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report";
+            String expressionPass = "gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_DomainConsistency/gmd:result/gmd:DQ_ConformanceResult"
+                                   + "/gmd:specification/gmd:CI_Citation/gmd:title[gco:CharacterString='Technical Guidance for the implementation of INSPIRE View Services v3.0']"
+                                   + "/../../../gmd:pass/gco:Boolean";
             
-            String report = xPath.compile(expressionReport).evaluate(xmlDocument);
             
             //read an xml node using xpath
-            Node reportNodeTest = (Node) xPath.compile(expressionReport).evaluate(xmlDocument, XPathConstants.NODE);
+            Node passNode = (Node) xPath.compile(expressionPass).evaluate(xmlDocument, XPathConstants.NODE);
+            System.out.println("pass: " + passNode.getTextContent());
             
-            //read a nodelist using xpath
-            NodeList reportNodeList = (NodeList) xPath.compile(expressionReport).evaluate(xmlDocument, XPathConstants.NODESET);
-            
-            String expressionTechnialGuidanceServices = "./gmd:DQ_DomainConsistency/gmd:result/gmd:DQ_ConformanceResult/gmd:specification/gmd:CI_Citation/gmd:title/gco:CharacterString";
-            XPathExpression xPathTechnicalGuidance = xPath.compile(expressionTechnialGuidanceServices);
-            
-            Node technicalNode = null;
-            for (int reportNodeIndex=0 ; reportNodeIndex < reportNodeList.getLength(); reportNodeIndex++){
-                Node reportNode = reportNodeList.item(reportNodeIndex);
-                String title = xPathTechnicalGuidance.evaluate(reportNode);
-                
-                
-                
-                System.out.println("reportNode: " + reportNode);
-                System.out.println("title: " + title);
-                
-                
-                if ("Technical Guidance for the implementation of INSPIRE View Services v3.0".equals(title)){
-                    technicalNode = reportNode;
-                }
-            }
-            
-            String expressionPass = "./gmd:DQ_DomainConsistency/gmd:result/gmd:DQ_ConformanceResult/gmd:pass/gco:Boolean";
-            String pass = xPath.compile(expressionPass).evaluate(technicalNode);
-            Node passNode = (Node) xPath.compile(expressionPass).evaluate(technicalNode, XPathConstants.NODE);
-            passNode.setTextContent("iets anders");
-            
-            System.out.println("pass: " + pass);
-            
-            
+            passNode.setTextContent("hoi, iets anders");        
+            System.out.println("pass: " + passNode.getTextContent());
+             
             try {    
                 Transformer transformer = TransformerFactory.newInstance().newTransformer();
                 Result output = new StreamResult(new File("/Users/Jurgen/GitRepos/ResearchJurgen/resources/output.xml"));
@@ -154,7 +123,7 @@ public class ResearchXQuery {
             Logger.getLogger(ResearchXQuery.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-    return reportNodeList.getLength();
+    return 0;
         
     }    
 }
